@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  client: one
+  order: one
+  sales: one
+  first_touch: 2020-12-09 17:17:18
+  comments: MyText
+
+two:
+  user: two
+  client: two
+  order: two
+  sales: two
+  first_touch: 2020-12-09 17:17:18
+  comments: MyText
