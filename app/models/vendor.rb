@@ -1,4 +1,5 @@
 class Vendor < ApplicationRecord
-  has_one :address
+  has_many :address
+  
   
 end

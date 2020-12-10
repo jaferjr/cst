@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :product_quantities
   has_many :sales
   has_many :touches
+  has_many :address
 end

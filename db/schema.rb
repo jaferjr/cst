@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_223108) do
+ActiveRecord::Schema.define(version: 2020_12_10_142406) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "country"
@@ -19,10 +19,8 @@ ActiveRecord::Schema.define(version: 2020_12_09_223108) do
     t.string "neighborhood"
     t.string "public_place"
     t.string "number"
-    t.integer "client_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["client_id"], name: "index_addresses_on_client_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -42,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_12_09_223108) do
     t.integer "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_clients_on_address_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -143,21 +143,21 @@ ActiveRecord::Schema.define(version: 2020_12_09_223108) do
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_users_on_address_id"
   end
 
   create_table "vendors", force: :cascade do |t|
     t.string "description"
     t.string "contact_person"
     t.string "phone"
-    t.integer "address_id", null: false
     t.string "cnpj"
     t.text "obs"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["address_id"], name: "index_vendors_on_address_id"
   end
 
-  add_foreign_key "addresses", "clients"
+  add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "users"
   add_foreign_key "comissions", "sales"
   add_foreign_key "comissions", "users"
@@ -174,5 +174,5 @@ ActiveRecord::Schema.define(version: 2020_12_09_223108) do
   add_foreign_key "touches", "orders"
   add_foreign_key "touches", "sales", column: "sales_id"
   add_foreign_key "touches", "users"
-  add_foreign_key "vendors", "addresses"
+  add_foreign_key "users", "addresses"
 end
